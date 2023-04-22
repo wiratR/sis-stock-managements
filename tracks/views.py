@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Track
 from bootstrap_datepicker_plus.widgets import DatePickerInput
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 class TrackBaseView(View):
     model = Track
@@ -25,7 +25,7 @@ class TrackDetailView(TrackBaseView, DetailView):
     the specific Track here and in the Views below"""
 
 
-class TrackCreateView(TrackBaseView, CreateView):
+class TrackCreateView(LoginRequiredMixin, TrackBaseView, CreateView):
     """View to create a new track"""
     # class attributes ...
     def get_form(self):
@@ -34,8 +34,7 @@ class TrackCreateView(TrackBaseView, CreateView):
         return form
 
     
-
-class TrackUpdateView(TrackBaseView, UpdateView):
+class TrackUpdateView(LoginRequiredMixin, TrackBaseView, UpdateView):
     """View to update a track"""
     # class attributes ...
 
@@ -45,6 +44,5 @@ class TrackUpdateView(TrackBaseView, UpdateView):
         return form
 
 
-
-class TrackDeleteView(TrackBaseView, DeleteView):
+class TrackDeleteView(LoginRequiredMixin, TrackBaseView, DeleteView):
     """View to delete a Track"""

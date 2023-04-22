@@ -21,6 +21,8 @@ from django.urls import path, include
 urlpatterns = [
     path('', include('tracks.urls')), # added
     path('admin/', admin.site.urls),
+    # add for control authen account
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 
 
