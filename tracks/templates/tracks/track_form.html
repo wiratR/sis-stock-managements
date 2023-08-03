@@ -17,7 +17,6 @@
     <div class="col mt-5">
         <form action="" method="post">
             {% csrf_token %}
-            <!-- {{ form | crispy }} {# Renders form fields #} -->
             <div class="form-row">
                 <div class="form-group col-md-6 mb-0">
                     {{ form.workOrder|as_crispy_field }}
@@ -25,12 +24,27 @@
                 <div class="form-group col-md-6 mb-0">
                     {{ form.equipmentName|as_crispy_field }}
                 </div>
-
+                <div class="form-group col-md-6 mb-0">
+                    {{ form.serialNumber|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                    {{ form.failureCode|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                    {{ form.actionCode|as_crispy_field }}
+                </div>
+                <div class="form-group col-md-6 mb-0">
+                    {{ form.causeCode|as_crispy_field }}
+                </div>
                 {{ form.compleateDate|as_crispy_field }}
+                <div class="form-group col-md-6 mb-0">
+                    {{ form.remark|as_crispy_field }}
+                </div>
             </div>
             <div class="container d-flex justify-content-center" style="width: 10%;">
-                <input type="submit" class="btn btn-primary btn-lg" value="Submit" style="margin-right: 30px; margin-top: 30px;">
-                <input type="submit" class="btn btn-danger btn-lg" style="margin-top: 30px;" 
+                <input type="submit" class="btn btn-primary btn-lg" value="Submit"
+                    style="margin-right: 30px; margin-top: 30px;">
+                <input type="submit" class="btn btn-danger btn-lg" style="margin-top: 30px;"
                     onclick="window.location='{{list_all}}'; return false;" value="Cancel">
             </div>
         </form>
@@ -39,5 +53,6 @@
 </div>
 
 <!-- END BOOTSTRAP FORM -->
+
 {% endblock %}
 

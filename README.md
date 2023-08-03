@@ -73,4 +73,11 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+> Sample User
+
+```
+username : admin
+password : Sispass.2023@
+```
+
 <br />

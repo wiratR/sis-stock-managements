@@ -14,11 +14,20 @@
                     </tr>
                 </thead>
                 <tbody>
-
                     {% for label, value in track.get_fields %}
                     <tr>
                         <td>{{label | upper}}</td>
-                        <td>{{value}}</td>
+                        {%if label == 'Compleate Date' %}
+                            <td>{{value | date:'d-m-Y'}}</td>
+                        {%elif label == 'Remark'%}
+                            {% if value == None %}
+                                <td></td>
+                            {% else %}
+                                <td>{{value}}</td>
+                            {% endif %}
+                        {%else%}
+                            <td>{{value}}</td>
+                        {%endif%}
                     </tr>
                     {% endfor %}
 
