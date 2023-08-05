@@ -3,11 +3,12 @@ from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .models import Track
+from .models import Track, FailureCode, ActionCode, CauseCode
 from bootstrap_datepicker_plus.widgets import DatePickerInput
 from django.contrib.auth.mixins import LoginRequiredMixin
 from datetime import datetime
 from .forms import TrackForm
+from django.shortcuts import render
 
 class TrackBaseView(View):
     model = Track
@@ -29,26 +30,40 @@ class TrackDetailView(TrackBaseView, DetailView):
     Use the 'track' variable in the template to access
     the specific Track here and in the Views below"""
 
+
     
 class TrackCreateView(LoginRequiredMixin, TrackBaseView, CreateView):
     """View to create a new track"""
     # class attributes ...
-    
     def get_form(self):
-        # form = super().get_form()
         form = TrackForm
-        # form.fields["compleateDate"].widget = DatePickerInput()
         return form
-
     
 class TrackUpdateView(LoginRequiredMixin, TrackBaseView, UpdateView):
     """View to update a track"""
     # class attributes ...
     def get_form(self):
-        form = super().get_form()
-        form.fields["compleateDate"].widget = DatePickerInput()
+        form = TrackForm
         return form
 
 
 class TrackDeleteView(LoginRequiredMixin, TrackBaseView, DeleteView):
     """View to delete a Track"""
+
+
+def load_failure_code(request):
+    equipmentName_id = request.GET.get('equipmentName')
+    failureCodes = FailureCode.objects.filter(equipmentName_id=equipmentName_id).order_by('failureCode')
+    return render(request, 'tracks/failure_code_list_options.html', {'failureCodes': failureCodes})
+
+
+def load_action_code(request):
+    equipmentName_id = request.GET.get('equipmentName')
+    actionCodes = ActionCode.objects.filter(equipmentName_id=equipmentName_id).order_by('actionCode')
+    return render(request, 'tracks/action_code_list_options.html', {'actionCodes': actionCodes})
+
+def load_cause_code(request):
+    equipmentName_id = request.GET.get('equipmentName')
+    causeCodes = CauseCode.objects.filter(equipmentName_id=equipmentName_id).order_by('causeCode')
+    return render(request, 'tracks/cause_code_list_options.html', {'causeCodes': causeCodes})
+

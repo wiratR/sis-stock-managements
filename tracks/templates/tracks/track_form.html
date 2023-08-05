@@ -10,12 +10,19 @@
 
 {% url 'tracks:all' as list_all %}
 
+{% url 'tracks:ajax_load_failure_code' as list_failure_code %}
+{% url 'tracks:ajax_load_action_code' as list_action_code %}
+{% url 'tracks:ajax_load_cause_code' as list_cause_code %}
+
 {% load crispy_forms_tags %}
 
 <!-- BOOTSTRAP FORM -->
 <div class="container d-flex justify-content-center mt-5" style="width: 25%;">
     <div class="col mt-5">
-        <form action="" method="post">
+        <form action="" method="post" id="tracksForm" 
+        data-failure-code-url='{{list_failure_code}}' novalidate
+        data-action-code-url='{{list_action_code}}' novalidate
+        data-cause-code-url='{{list_cause_code}}' novalidate>
             {% csrf_token %}
             <div class="form-row">
                 <div class="form-group col-md-6 mb-0">
@@ -51,6 +58,51 @@
 
     </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+    $("#id_equipmentName").change(function () {
+
+        var url1 = $("#tracksForm").attr("data-failure-code-url");
+        var url2 = $("#tracksForm").attr("data-action-code-url");
+        var url3 = $("#tracksForm").attr("data-cause-code-url");
+
+        var equipmentNameId = $(this).val();                        // get the selected equipment Name ID from the HTML input
+
+        $.ajax({                                        // initialize an AJAX request
+            url: url1,                                  // set the url of the request 
+            data: {
+                'equipmentName': equipmentNameId        // add the country id to the GET parameters
+            },
+            success: function (data) {                  // `data` is the return of the `load_failure_code` view function
+                
+                $("#id_failureCode").html(data);        // replace the contents of the city input with the data that came from the server
+            }
+        });
+        
+
+        $.ajax({                                        // initialize an AJAX request
+            url: url2,                                  // set the url of the request 
+            data: {
+                'equipmentName': equipmentNameId        // add the country id to the GET parameters
+            },
+            success: function (data) {                  // `data` is the return of the `load_failure_code` view function
+                alert(data)
+                $("#id_actionCode").html(data);         // replace the contents of the city input with the data that came from the server
+            }
+        });
+
+        $.ajax({                                        // initialize an AJAX request
+            url: url3,                                  // set the url of the request 
+            data: {
+                'equipmentName': equipmentNameId        // add the country id to the GET parameters
+            },
+            success: function (data) {                  // `data` is the return of the `load_failure_code` view function
+                $("#id_causeCode").html(data);          // replace the contents of the city input with the data that came from the server
+            }
+        });
+    });
+</script>
 
 <!-- END BOOTSTRAP FORM -->
 
