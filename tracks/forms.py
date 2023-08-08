@@ -9,18 +9,15 @@ class TrackForm(forms.ModelForm):
         model = Track
         fields = ['workOrder', 'equipmentName',
                 'serialNumber', 'failureCode', 'actionCode', 'causeCode', 'compleateDate', 'remark']
-        
-    
+          
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_method = 'post'
-
         self.fields["failureCode"].queryset     = FailureCode.objects.none()
         self.fields["actionCode"].queryset      = ActionCode.objects.none()
         self.fields["causeCode"].queryset       = CauseCode.objects.none()
-        self.fields["compleateDate"].widget     = DatePickerInput(options={"format": "DD-MM-YYYY"})
-        
+
         # Dropdown list for Failure Code , Action Code , Cause Code
         if 'equipmentName' in self.data:
             try:

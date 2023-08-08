@@ -33,17 +33,22 @@ class TrackDetailView(TrackBaseView, DetailView):
 
     
 class TrackCreateView(LoginRequiredMixin, TrackBaseView, CreateView):
-    """View to create a new track"""
-    # class attributes ...
-    def get_form(self):
-        form = TrackForm
-        return form
+    """View to create a new track"""  
     
+    def get_form(self):
+        '''add date picker in forms'''
+        form = super(TrackCreateView, self).get_form()
+        form.fields['compleateDate'].widget = DatePickerInput(options={"format": "DD-MM-YYYY"})
+        return form
+
+      
 class TrackUpdateView(LoginRequiredMixin, TrackBaseView, UpdateView):
     """View to update a track"""
-    # class attributes ...
+    
     def get_form(self):
-        form = TrackForm
+        '''add date picker in forms'''
+        form = super(TrackUpdateView, self).get_form()
+        form.fields['compleateDate'].widget = DatePickerInput(options={"format": "DD-MM-YYYY"})
         return form
 
 

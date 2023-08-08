@@ -17,34 +17,36 @@
 {% load crispy_forms_tags %}
 
 <!-- BOOTSTRAP FORM -->
-<div class="container d-flex justify-content-center mt-5" style="width: 25%;">
+<div class="container d-flex justify-content-center mt-5" style="width: 60%;">
     <div class="col mt-5">
         <form action="" method="post" id="tracksForm" 
-        data-failure-code-url='{{list_failure_code}}' novalidate
-        data-action-code-url='{{list_action_code}}' novalidate
-        data-cause-code-url='{{list_cause_code}}' novalidate>
+            data-failure-code-url='{{list_failure_code}}' novalidate
+            data-action-code-url='{{list_action_code}}' novalidate 
+            data-cause-code-url='{{list_cause_code}}' novalidate>
             {% csrf_token %}
             <div class="form-row">
-                <div class="form-group col-md-6 mb-0">
+                <div class="form-group col-6">
                     {{ form.workOrder|as_crispy_field }}
                 </div>
-                <div class="form-group col-md-6 mb-0">
+                <div class="form-group col-6">
                     {{ form.equipmentName|as_crispy_field }}
                 </div>
-                <div class="form-group col-md-6 mb-0">
+                <div class="form-group col-6">
                     {{ form.serialNumber|as_crispy_field }}
                 </div>
-                <div class="form-group col-md-6 mb-0">
+                <div class="form-group col-6">
                     {{ form.failureCode|as_crispy_field }}
                 </div>
-                <div class="form-group col-md-6 mb-0">
+                <div class="form-group col-6">
                     {{ form.actionCode|as_crispy_field }}
                 </div>
-                <div class="form-group col-md-6 mb-0">
+                <div class="form-group col-6">
                     {{ form.causeCode|as_crispy_field }}
                 </div>
-                {{ form.compleateDate|as_crispy_field }}
-                <div class="form-group col-md-6 mb-0">
+                <div class="form-group col-6">
+                    {{ form.compleateDate|as_crispy_field }}
+                </div>
+                <div class="form-group col-6">
                     {{ form.remark|as_crispy_field }}
                 </div>
             </div>
@@ -55,9 +57,10 @@
                     onclick="window.location='{{list_all}}'; return false;" value="Cancel">
             </div>
         </form>
-
     </div>
 </div>
+
+
 
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
@@ -87,7 +90,6 @@
                 'equipmentName': equipmentNameId        // add the country id to the GET parameters
             },
             success: function (data) {                  // `data` is the return of the `load_failure_code` view function
-                alert(data)
                 $("#id_actionCode").html(data);         // replace the contents of the city input with the data that came from the server
             }
         });
