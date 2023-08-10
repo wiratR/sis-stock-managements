@@ -13,7 +13,7 @@ from django.shortcuts import render
 class TrackBaseView(View):
     model = Track
     # fields = ['workOrder', 'equipmentName',
-    #           'serialNumber', 'failureCode', 'actionCode', 'causeCode', 'compleateDate', 'remark']
+    #           'serialNumber', 'failureCode', 'actionCode', 'causeCode', 'workDate', 'compleateDate', 'remark']
     fields = '__all__'
     success_url = reverse_lazy('tracks:all')
     
@@ -39,6 +39,7 @@ class TrackCreateView(LoginRequiredMixin, TrackBaseView, CreateView):
         '''add date picker in forms'''
         form = super(TrackCreateView, self).get_form()
         form.fields['compleateDate'].widget = DatePickerInput(options={"format": "DD-MM-YYYY"})
+        form.fields['workDate'].widget = DatePickerInput(options={"format": "DD-MM-YYYY"})
         return form
 
       
@@ -49,6 +50,7 @@ class TrackUpdateView(LoginRequiredMixin, TrackBaseView, UpdateView):
         '''add date picker in forms'''
         form = super(TrackUpdateView, self).get_form()
         form.fields['compleateDate'].widget = DatePickerInput(options={"format": "DD-MM-YYYY"})
+        form.fields['workDate'].widget = DatePickerInput(options={"format": "DD-MM-YYYY"})
         return form
 
 

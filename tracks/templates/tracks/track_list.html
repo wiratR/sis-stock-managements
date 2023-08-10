@@ -20,6 +20,7 @@
                 <th class="text-center" scope="col">Failure Code</th>
                 <th class="text-center" scope="col">Action Code</th>
                 <th class="text-center" scope="col">Cause Code</th>
+                <th class="text-center" scope="col">Work Date</th>
                 <th class="text-center" scope="col">Date Compleate</th>
                 <th class="text-center" scope="col">Remark</th>
                 <th></th>
@@ -36,6 +37,7 @@
                 <td class="text-center">{{track.failureCode}}</td>
                 <td class="text-center">{{track.actionCode}}</td>
                 <td class="text-center">{{track.causeCode}}</td>
+                <td class="text-center">{{ track.workDate | date:'d-m-Y' }}</td> 
                 <td class="text-center">{{ track.compleateDate | date:'d-m-Y' }}</td> {% comment %} update format date "date:'d-m-Y'" {% endcomment %}
                 {% if track.remark == None %}
                     <td class="text-center"></td>

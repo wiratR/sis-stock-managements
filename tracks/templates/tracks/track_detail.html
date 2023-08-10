@@ -19,6 +19,8 @@
                         <td>{{label | upper}}</td>
                         {%if label == 'Compleate Date' %}
                             <td>{{value | date:'d-m-Y'}}</td>
+                        {%elif label == 'Work Date' %}
+                            <td>{{value | date:'d-m-Y'}}</td>
                         {%elif label == 'Remark'%}
                             {% if value == None %}
                                 <td></td>
