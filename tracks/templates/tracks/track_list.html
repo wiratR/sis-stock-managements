@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<!-- Load from unpkg -->
+<script src="https://unpkg.com/htmx.org@1.7.0"></script>
+
 {% for track in track_list %}
 {% for colname in track.column_set.all %}
 <p>{{colname}}</p>

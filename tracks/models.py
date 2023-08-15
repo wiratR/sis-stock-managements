@@ -48,8 +48,8 @@ class Track(models.Model):
     failureCode   = models.ForeignKey(FailureCode, on_delete=models.SET_NULL, null=True)
     actionCode    = models.ForeignKey(ActionCode, on_delete=models.SET_NULL, null=True)
     causeCode     = models.ForeignKey(CauseCode, on_delete=models.SET_NULL, null=True)
-    workDate      = models.DateField(_('Work Date'), null=True)
-    compleateDate = models.DateField(_('Compleate Date'), null=True)
+    workDate = models.DateField(_('Work Date'), blank=True, null=True)
+    compleateDate = models.DateField(_('Compleate Date'), blank=True, null=True)
     remark        = models.CharField(_('Remark'), max_length=125, null=True, blank=True)
     
     def __str__(self):
